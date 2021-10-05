@@ -8,11 +8,11 @@ public class MoveShip : MonoBehaviour
     private Vector3 initialPos = new Vector3 (0f,0f,0f);
     private Vector3 initialRot = new Vector3 (0, 0, 0);
     private Vector3 movePos = new Vector3 (0f, 0f, 0f);
-    private Vector3 moveRot = new Vector3 (0f, 0f, 0f);
+    private Vector3 moveRot = new Vector3 (0, 0, 0);
     private Vector3 rightMove = new Vector3 (1f, 0f, 0f);
     private Vector3 leftMove = new Vector3 (-1f,0f,0f);
-    private Vector3 leftSpin = new Vector3 (0,0,40);
-    private Vector3 rightSpin = new Vector3 (0,0,-40);
+    private Vector3 leftSpin = new Vector3 (0,0,120);
+    private Vector3 rightSpin = new Vector3 (0,0,-120);
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +25,21 @@ public class MoveShip : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
+            //desplazamiento a la izquierda
             movePos += leftMove * speed * Time.deltaTime;
-            transform.eulerAngles += leftSpin * Time.deltaTime;
-            if(movePos[0] >= -20)
+            //rotación del movimiento
+            moveRot[2] += leftSpin[2] * Time.deltaTime;
+            //restricción de rotación
+            if (moveRot[2] < 35)
+            {
+                transform.eulerAngles = moveRot;
+            }
+            else
+            {
+                moveRot[2] = 35;
+            }
+            //restricción de area
+            if (movePos[0] >= -20)
             {
                 transform.position = movePos;
             }
@@ -36,10 +48,22 @@ public class MoveShip : MonoBehaviour
                 movePos = transform.position;
             }
         }
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
+            //despalzamiento a la derecha
             movePos += rightMove * speed * Time.deltaTime;
-            transform.eulerAngles += rightSpin * Time.deltaTime;
+            //rotación del moviento
+            moveRot[2] += rightSpin[2] * Time.deltaTime;
+            //restricción de rotación
+            if (moveRot[2] > -35)
+            {
+                transform.eulerAngles = moveRot;
+            }
+            else
+            {
+                moveRot[2] = -35;
+            }
+            //restricción de area
             if (movePos[0] <= 20)
             {
                 transform.position = movePos;
@@ -49,5 +73,6 @@ public class MoveShip : MonoBehaviour
                 movePos = transform.position;
             }
         }
+        //print(moveRot[2]);
     }
 }
