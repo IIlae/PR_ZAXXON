@@ -11,8 +11,38 @@ public class MoveShip : MonoBehaviour
     private Vector3 moveRot = new Vector3 (0, 0, 0);
     private Vector3 rightMove = new Vector3 (1f, 0f, 0f);
     private Vector3 leftMove = new Vector3 (-1f,0f,0f);
+    private Vector3 upMove = new Vector3 (0f,1f,0f);
+    private Vector3 downMove = new Vector3 (0f,-1f,0f);
     private Vector3 leftSpin = new Vector3 (0,0,120);
     private Vector3 rightSpin = new Vector3 (0,0,-120);
+    //método para restringir la posición en un eje
+    public void limitSpace(int x, float lim, bool superior = true)
+    {
+        //si el límite es por arriba
+        if (superior)
+        {
+            if (movePos[x] <= lim)
+            {
+                transform.position = movePos;
+            }
+            else
+            {
+                movePos = transform.position;
+            }
+        }
+        //si el límite es por abajo
+        else
+        {
+            if (movePos[x] >= lim)
+            {
+                transform.position = movePos;
+            }
+            else
+            {
+                movePos = transform.position;
+            }
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +58,7 @@ public class MoveShip : MonoBehaviour
             //desplazamiento a la izquierda
             movePos += leftMove * speed * Time.deltaTime;
             //rotación del movimiento
-            moveRot[2] += leftSpin[2] * Time.deltaTime;
+            moveRot += leftSpin * Time.deltaTime;
             //restricción de rotación
             if (moveRot[2] < 35)
             {
@@ -39,21 +69,14 @@ public class MoveShip : MonoBehaviour
                 moveRot[2] = 35;
             }
             //restricción de area
-            if (movePos[0] >= -20)
-            {
-                transform.position = movePos;
-            }
-            else
-            {
-                movePos = transform.position;
-            }
+            limitSpace(0, -20, false);
         }
         if (Input.GetKey(KeyCode.D))
         {
             //despalzamiento a la derecha
             movePos += rightMove * speed * Time.deltaTime;
             //rotación del moviento
-            moveRot[2] += rightSpin[2] * Time.deltaTime;
+            moveRot += rightSpin * Time.deltaTime;
             //restricción de rotación
             if (moveRot[2] > -35)
             {
@@ -64,15 +87,43 @@ public class MoveShip : MonoBehaviour
                 moveRot[2] = -35;
             }
             //restricción de area
-            if (movePos[0] <= 20)
+            limitSpace(0, 20);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            //desplazamiento hacia arriba
+            movePos += upMove * speed * Time.deltaTime;
+            //rotación del movimiento
+            /*moveRot += leftSpin * Time.deltaTime;
+            //restricción de rotación
+            if (moveRot[2] < 35)
             {
-                transform.position = movePos;
+                transform.eulerAngles = moveRot;
             }
             else
             {
-                movePos = transform.position;
-            }
+                moveRot[2] = 35;
+            }*/
+            //restricción de area
+            limitSpace(1, 14);
         }
-        //print(moveRot[2]);
+        if (Input.GetKey(KeyCode.S))
+        {
+            //desplazamiento hacia arriba
+            movePos += downMove * speed * Time.deltaTime;
+            //rotación del movimiento
+            /*moveRot += leftSpin * Time.deltaTime;
+            //restricción de rotación
+            if (moveRot[2] < 35)
+            {
+                transform.eulerAngles = moveRot;
+            }
+            else
+            {
+                moveRot[2] = 35;
+            }*/
+            //restricción de area
+            limitSpace(1, -1, false);
+        }
     }
 }
