@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class MovePillar : MonoBehaviour
 {
-    public GameObject baseNave;
-    private MoveShip MoveShip;
-    private Vector3 moveBack = new Vector3(0, 0, -60);
+    private MoveShip moveShip;
+    private Vector3 moveBack = new Vector3(0, 0, -4);
     // Start is called before the first frame update
     void Start()
     {
-        MoveShip = baseNave.GetComponent<MoveShip>();
+        moveShip = GameObject.Find("baseNave").GetComponent<MoveShip>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (transform.position.z > -55)
+        if (transform.position.z > -55)
         {
-            transform.position += moveBack * MoveShip.speed * Time.deltaTime;
+            transform.position += moveBack * moveShip.speed * Time.deltaTime;
         }
         
     }
