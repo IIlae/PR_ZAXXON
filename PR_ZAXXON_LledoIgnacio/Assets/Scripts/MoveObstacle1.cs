@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePillar : MonoBehaviour
+public class MoveObstacle1 : MonoBehaviour
 {
     private MoveShip moveShip;
     private Vector3 moveBack = new Vector3(0, 0, -4);
@@ -19,6 +19,9 @@ public class MovePillar : MonoBehaviour
         {
             transform.position += moveBack * moveShip.speed * Time.deltaTime;
         }
-        
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

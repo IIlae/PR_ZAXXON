@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 463276794}
   m_Layer: 0
   m_Name: baseNave
-  m_TagString: Untagged
+  m_TagString: Nave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,6 +292,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &947143706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 947143708}
+  - component: {fileID: 947143707}
+  - component: {fileID: 947143709}
+  m_Layer: 0
+  m_Name: gameOperator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &947143707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947143706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fadc1e45633887469235a0543204db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsInitPos: {x: 0, y: 28.9, z: 207}
+  moveShip: {fileID: 0}
+  obstacArr:
+  - {fileID: 3662439012855517825, guid: 6bd91217a6fdee44198a331adfb43274, type: 3}
+  - {fileID: 7702426398236038931, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+  intervalo: 0
+  espaciado: 25
+--- !u!4 &947143708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947143706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &947143709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947143706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec7c27a003a5664c88439c89ebe53cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,9 +660,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
-  m_Height: 2
+  m_Height: 24.062267
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.000000045013774, y: -0.00004115906, z: -0.00000009963539}
 --- !u!23 &2006706123
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -663,6 +726,67 @@ Transform:
   m_Father: {fileID: 463276793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1805645203832817902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 207.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339221531968159337, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702426398236038931, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_Name
+      value: baseSaliente
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702426398236038931, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7df15e9e95471b744be34269b0e6e356, type: 3}
 --- !u!1001 &3662439012992734144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -672,7 +796,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3662439012855517825, guid: 6bd91217a6fdee44198a331adfb43274, type: 3}
       propertyPath: m_Name
-      value: baseObstaculo
+      value: basePilar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662439012855517825, guid: 6bd91217a6fdee44198a331adfb43274, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3662439012855517826, guid: 6bd91217a6fdee44198a331adfb43274, type: 3}
       propertyPath: m_RootOrder

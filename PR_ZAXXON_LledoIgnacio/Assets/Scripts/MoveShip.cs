@@ -126,4 +126,11 @@ public class MoveShip : MonoBehaviour
             limitSpace(1, -1, false);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Obstacle")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
