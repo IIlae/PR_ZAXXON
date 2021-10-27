@@ -15,6 +15,7 @@ public class MoveShip : MonoBehaviour
     private Vector3 downMove = new Vector3 (0f,-1f,0f);
     private Vector3 leftSpin = new Vector3 (0,0,120);
     private Vector3 rightSpin = new Vector3 (0,0,-120);
+    GameFunctions gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
     //método para restringir la posición en un eje
     public void limitSpace(int x, float lim, bool superior = true)
     {
@@ -93,17 +94,6 @@ public class MoveShip : MonoBehaviour
         {
             //desplazamiento hacia arriba
             movePos += upMove * speed * Time.deltaTime;
-            //rotación del movimiento
-            /*moveRot += leftSpin * Time.deltaTime;
-            //restricción de rotación
-            if (moveRot[2] < 35)
-            {
-                transform.eulerAngles = moveRot;
-            }
-            else
-            {
-                moveRot[2] = 35;
-            }*/
             //restricción de area
             limitSpace(1, 14);
         }
@@ -111,17 +101,6 @@ public class MoveShip : MonoBehaviour
         {
             //desplazamiento hacia arriba
             movePos += downMove * speed * Time.deltaTime;
-            //rotación del movimiento
-            /*moveRot += leftSpin * Time.deltaTime;
-            //restricción de rotación
-            if (moveRot[2] < 35)
-            {
-                transform.eulerAngles = moveRot;
-            }
-            else
-            {
-                moveRot[2] = 35;
-            }*/
             //restricción de area
             limitSpace(1, -1, false);
         }
@@ -130,7 +109,7 @@ public class MoveShip : MonoBehaviour
     {
         if(other.gameObject.tag == "Obstacle")
         {
-            Destroy(this.gameObject);
+            gameFunctions.gameOver();
         }
     }
 }

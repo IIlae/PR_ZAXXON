@@ -14,13 +14,11 @@ public class GameFunctions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dead)
-        {
-            gameOver();
-        }
+        
     }
-    void gameOver()
+    public void gameOver()
     {
-
+        dead = true;
+        Destroy(GameObject.Find("baseNave"));
     }
 }
