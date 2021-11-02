@@ -15,7 +15,7 @@ public class MoveShip : MonoBehaviour
     private Vector3 downMove = new Vector3 (0f,-1f,0f);
     private Vector3 leftSpin = new Vector3 (0,0,120);
     private Vector3 rightSpin = new Vector3 (0,0,-120);
-    GameFunctions gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
+    GameFunctions gameFunctions;
     //método para restringir la posición en un eje
     public void limitSpace(int x, float lim, bool superior = true)
     {
@@ -47,6 +47,7 @@ public class MoveShip : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
         transform.position = initialPos;
         transform.eulerAngles = initialRot;
     }
@@ -107,6 +108,7 @@ public class MoveShip : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        print("colisión");
         if(other.gameObject.tag == "Obstacle")
         {
             gameFunctions.gameOver();

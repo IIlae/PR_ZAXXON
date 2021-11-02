@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Nave
+  - Obstacle
   - Obst Pilar
   - Obst Saliente
   layers:

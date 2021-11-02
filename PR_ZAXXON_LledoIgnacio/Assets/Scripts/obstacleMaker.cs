@@ -6,14 +6,16 @@ public class obstacleMaker : MonoBehaviour
 {
     private Vector3 obsInitPos = new Vector3(0f, 28.9f, 207f);
     private MoveShip moveShip;
+    private GameFunctions gameFunctions;
     [SerializeField] GameObject[] obstacArr = {GameObject.Find("basePilar"), GameObject.Find("baseSaliente")};
-    GameFunctions gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
     float intervalo;
     float espaciado = 25f;
     // Start is called before the first frame update
     void Start()
     {
+        espaciado = 25f;
         moveShip = GameObject.Find("baseNave").GetComponent<MoveShip>();
+        gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
         StartCoroutine("ObstacleMake");
     }
 
@@ -25,12 +27,12 @@ public class obstacleMaker : MonoBehaviour
 
     IEnumerator ObstacleMake()
     {
-        print("coroutine Started");
+        //print("coroutine Started");
         Vector3 instPos;
-        while (true)
+        while (!gameFunctions.dead)
         {
             intervalo = espaciado / moveShip.speed;
-            print(intervalo);
+            //print(espaciado + "/" + moveShip.speed + "=" + intervalo);
             int randObs = Random.Range(0, obstacArr.Length);
             float yValue;
             if (randObs == 0)
@@ -43,7 +45,7 @@ public class obstacleMaker : MonoBehaviour
             }
             instPos = new Vector3(Random.Range(20,-20), yValue, 207);
             Instantiate(obstacArr[randObs], instPos, Quaternion.identity);
-            print("instanciado");
+            //print("instanciado");
             yield return new WaitForSeconds(intervalo);
         }
     }
