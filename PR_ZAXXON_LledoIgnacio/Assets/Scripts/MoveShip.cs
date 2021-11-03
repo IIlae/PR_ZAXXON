@@ -111,6 +111,7 @@ public class MoveShip : MonoBehaviour
         print("colisión");
         if(other.gameObject.tag == "Obstacle")
         {
+            print("obstáculo");
             gameFunctions.gameOver();
         }
     }
