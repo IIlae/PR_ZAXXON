@@ -8,15 +8,18 @@ public class GameFunctions : MonoBehaviour
 {
     GameObject baseNave;
     Text overMessage;
+    Image heartsImg;
+    [SerializeField] Sprite[] heartsSprt;
     public bool dead = false;
-    static int lives = 3;
     // Start is called before the first frame update
     void Start()
     {
-        print(lives);
+        GameManager.score = 0;
+        print(GameManager.lives);
         overMessage = GameObject.Find("ded").GetComponent<Text>();
+        heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
-        
+        heartsImg.sprite = heartsSprt[GameManager.lives];
     }
 
     // Update is called once per frame
@@ -28,13 +31,16 @@ public class GameFunctions : MonoBehaviour
     {
         dead = true;
         Destroy(baseNave);
-        if(lives < 1)
+
+        if(GameManager.lives < 1)
         {
+            print("Game Over");
             overMessage.enabled = true;
         }
         else
         {
-            lives--;
+            print("Continue");
+            GameManager.lives--;
             SceneManager.LoadScene("Screen1");
         }
     }
