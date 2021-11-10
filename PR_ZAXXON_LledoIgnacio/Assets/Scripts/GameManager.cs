@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static int lives = 2;
     public static int score;
     public static int highScore;
+    public static int volume;
+    public static bool newBest;
     // Start is called before the first frame update
     void Start()
     {

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameFunctions : MonoBehaviour
 {
     GameObject baseNave;
+    MoveShip moveShip;
     Text overMessage;
     Image heartsImg;
     [SerializeField] Sprite[] heartsSprt;
@@ -19,6 +20,7 @@ public class GameFunctions : MonoBehaviour
         overMessage = GameObject.Find("ded").GetComponent<Text>();
         heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
+        moveShip = baseNave.GetComponent<MoveShip>();
         heartsImg.sprite = heartsSprt[GameManager.lives];
     }
 
@@ -30,8 +32,15 @@ public class GameFunctions : MonoBehaviour
     public void gameOver()
     {
         dead = true;
-        Destroy(baseNave);
+        //Comprovación del score
+        if(GameManager.score > GameManager.highScore)
+        {
+            GameManager.highScore = GameManager.score;
+            GameManager.newBest = true;
+        }
 
+        Destroy(baseNave);
+        //Comprovación de vidas, si quedan recarga la escena, si no hay saca mensaje de game over
         if(GameManager.lives < 1)
         {
             print("Game Over");
@@ -42,6 +51,15 @@ public class GameFunctions : MonoBehaviour
             print("Continue");
             GameManager.lives--;
             SceneManager.LoadScene("Screen1");
+        }
+        StartCoroutine("ScoreGiver");
+    }
+    IEnumerator ScoreGiver()
+    {
+        while (!dead)
+        {
+            GameManager.score += moveShip.speed / 10;
+            yield return new WaitForSeconds(1);
         }
     }
 }

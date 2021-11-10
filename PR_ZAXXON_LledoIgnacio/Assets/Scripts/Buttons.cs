@@ -24,7 +24,7 @@ public class Buttons : MonoBehaviour
     }
     public void goToScores()
     {
-        SceneManager.LoadScene("HighScore");
+        SceneManager.LoadScene("Scores");
     }
     public void goToConfig()
     {
