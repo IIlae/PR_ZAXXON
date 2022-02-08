@@ -7,15 +7,22 @@ public class obstacleMaker : MonoBehaviour
     private Vector3 obsInitPos = new Vector3(0f, 28.9f, 207f);
     private MoveShip moveShip;
     private GameFunctions gameFunctions;
-    [SerializeField] GameObject[] obstacArr = {GameObject.Find("basePilar"), GameObject.Find("baseSaliente")};
+    [SerializeField] GameObject[] obstacArr;
     float intervalo;
     float espaciado = 25f;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        moveShip = GameObject.Find("baseNave").GetComponent<MoveShip>();
+        gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
+        for(int x = 0; x < obstacArr.Length; x++)
+        {
+            //print("instanciado " + 1);
+            obstacArr[x] = Resources.Load("prefabs/obstacle"+x) as GameObject; ;
+        }
+    }
     void Start()
     {
         espaciado = 25f;
-        moveShip = GameObject.Find("baseNave").GetComponent<MoveShip>();
-        gameFunctions = GameObject.Find("gameOperator").GetComponent<GameFunctions>();
         StartCoroutine("ObstacleMake");
     }
 

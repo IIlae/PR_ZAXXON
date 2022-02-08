@@ -112,7 +112,7 @@ public class MoveShip : MonoBehaviour
         if(other.gameObject.tag == "Obstacle")
         {
             print("obstáculo");
-            gameFunctions.gameOver();
+            gameFunctions.hitFunction();
         }
     }
 }

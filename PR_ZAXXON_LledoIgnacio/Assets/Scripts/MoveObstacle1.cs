@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoveObstacle1 : MonoBehaviour
 {
-    private MoveShip moveShip;
-    private Vector3 moveBack = new Vector3(0, 0, -4);
+    MoveShip moveShip;
+    //private Vector3 moveBack = new Vector3(0, 0, -4);
     GameFunctions gameFunctions;
     // Start is called before the first frame update
     void Start()
@@ -22,12 +22,21 @@ public class MoveObstacle1 : MonoBehaviour
         {
             if (transform.position.z > -55)
             {
-                transform.position += moveBack * moveShip.speed * Time.deltaTime;
+                transform.position += Vector3.back * moveShip.speed * Time.deltaTime;
             }
             else
             {
                 Destroy(gameObject);
             }
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Nave")
+        {
+            gameFunctions.SendMessage("hitFunction");
+            Destroy(this.gameObject);
+        }
+
     }
 }
