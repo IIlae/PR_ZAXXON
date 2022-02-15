@@ -22,7 +22,7 @@ public class MoveObstacle1 : MonoBehaviour
         {
             if (transform.position.z > -55)
             {
-                transform.position += Vector3.back * moveShip.speed * Time.deltaTime;
+                transform.position += Vector3.back * gameFunctions.speed * Time.deltaTime;
             }
             else
             {
@@ -34,7 +34,7 @@ public class MoveObstacle1 : MonoBehaviour
     {
         if(other.tag == "Nave")
         {
-            gameFunctions.SendMessage("hitFunction");
+            Instantiate(Resources.Load("prefabs/effects/Explotion2"), transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
 

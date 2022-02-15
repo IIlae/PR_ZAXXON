@@ -9,7 +9,7 @@ public class obstacleMaker : MonoBehaviour
     private GameFunctions gameFunctions;
     [SerializeField] GameObject[] obstacArr;
     float intervalo;
-    float espaciado = 25f;
+    float espaciado;
     private void Awake()
     {
         moveShip = GameObject.Find("baseNave").GetComponent<MoveShip>();
@@ -17,12 +17,12 @@ public class obstacleMaker : MonoBehaviour
         for(int x = 0; x < obstacArr.Length; x++)
         {
             //print("instanciado " + 1);
-            obstacArr[x] = Resources.Load("prefabs/obstacle"+x) as GameObject; ;
+            obstacArr[x] = Resources.Load("prefabs/obstacles/obstacle" + x) as GameObject;
         }
     }
     void Start()
     {
-        espaciado = 25f;
+        espaciado = 40f;
         StartCoroutine("ObstacleMake");
     }
 
@@ -38,8 +38,8 @@ public class obstacleMaker : MonoBehaviour
         Vector3 instPos;
         while (!gameFunctions.dead)
         {
-            intervalo = espaciado / moveShip.speed;
-            //print(espaciado + "/" + moveShip.speed + "=" + intervalo);
+            intervalo = espaciado / gameFunctions.speed;
+            //print(espaciado + "/" + gameFunctions.speed + "=" + intervalo);
             int randObs = Random.Range(0, obstacArr.Length);
             float yValue;
             if (randObs == 0)

@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class Scoreboard : MonoBehaviour
 {
-    //declaración de las variables de texto
+    //declaraciï¿½n de las variables de texto
     Text highScoreTxt;
     Text scoreTxt;
     Text newHighTxt;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //Asignación de las variables de texto
+        //Asignaciï¿½n de las variables de texto
         highScoreTxt = GameObject.Find("HighScore").GetComponent<Text>();
         newHighTxt = GameObject.Find("NewHigh").GetComponent<Text>();
         scoreTxt = GameObject.Find("CurrentScore").GetComponent<Text>();
-        //Asignación de valores
+    }
+    void Start()
+    {
+        
+        //Asignaciï¿½n de valores
         highScoreTxt.text = "HIGH SCORE: " + GameManager.highScore;
         scoreTxt.text = "SCORE: " + GameManager.score;
-        //condición para el mesaje de New High Score
+        //condiciï¿½n para el mesaje de New High Score
         if (GameManager.newBest)
         {
             newHighTxt.enabled = true;
@@ -30,7 +33,6 @@ public class Scoreboard : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

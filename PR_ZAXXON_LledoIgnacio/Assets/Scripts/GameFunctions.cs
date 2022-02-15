@@ -8,12 +8,18 @@ public class GameFunctions : MonoBehaviour
 {
     GameObject baseNave;
     GameObject dedScreen;
+    GameObject explotion;
     MoveShip moveShip;
     Text overMessage;
+    Text SpeedCounter;
     Image heartsImg;
     //GameManager gameManager;
     [SerializeField] Sprite[] heartsSprt;
+    private bool paused;
     public bool dead = false;
+    public float speed = 50;
+    public float accelNum = 0.3f;
+    public float accelTime = 0.1f;
     private void Awake()
     {
 
@@ -22,6 +28,8 @@ public class GameFunctions : MonoBehaviour
         heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
         dedScreen = GameObject.Find("DedScreen");
+        explotion = Resources.Load("prefabs/effects/Explotion1") as GameObject;
+        SpeedCounter = GameObject.Find("speedCount").GetComponent<Text>();
         moveShip = baseNave.GetComponent<MoveShip>();
         heartsImg.sprite = heartsSprt[GameManager.lives];
     }
@@ -30,16 +38,17 @@ public class GameFunctions : MonoBehaviour
         GameManager.score = 0;
         dedScreen.SetActive(false);
         StartCoroutine("ScoreGiver");
+        StartCoroutine("SpeedManage");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T)) pause();
     }
     public void hitFunction()
     {
-        //Comprovación de vidas, si quedan recarga la escena, si no hay saca mensaje de game over
+        //Comprovaciï¿½n de vidas, si quedan recarga la escena, si no hay saca mensaje de game over
         if(GameManager.lives < 1)
         {
             gameOver();
@@ -52,31 +61,66 @@ public class GameFunctions : MonoBehaviour
     private void damage()
     {
         GameManager.lives--;
+        heartsImg.sprite = heartsSprt[GameManager.lives];
         print("Hit");
     }
 
     private void gameOver()
     {
         Destroy(baseNave);
+        Instantiate(explotion, baseNave.transform.position, Quaternion.identity);
+        StopCoroutine("ScoreGiver");
+        StopCoroutine("SpeedManage");
         dead = true;
-        //Comprovación del score
+        heartsImg.enabled = false;
+        //Comprovaciï¿½n del score
         if (GameManager.score > GameManager.highScore)
         {
             GameManager.highScore = GameManager.score;
             GameManager.newBest = true;
         }
+        //print(GameManager.score);
 
         dedScreen.SetActive(true);
         print("game over");
         //SceneManager.LoadScene("Screen1");
     }
 
+    public void pause()
+    {
+        if (!paused)
+        {
+            print("paused");
+            paused = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            print("resumed");
+            Time.timeScale = 1;
+            paused = false;
+        }
+    }
+
     IEnumerator ScoreGiver()
     {
         while (!dead)
         {
-            GameManager.score += moveShip.speed / 10;
+            GameManager.score += (int) speed / 30;
             yield return new WaitForSeconds(1);
+        }
+    }
+
+    IEnumerator SpeedManage()
+    {
+        while(!dead)
+        {
+            speed += accelNum;
+            //Shader.SetGlobalVector("Vector2_f037d501af714dff8c4ee7609ccef207", Vector2.down * Uvelocity);
+            if (moveShip.latSpeed < 40) moveShip.latSpeed += 5;
+            SpeedCounter.text = "Speed: "+speed;
+            //print("mÃ¡s velocidad");
+            yield return new WaitForSeconds(accelTime);
         }
     }
 }

@@ -7,10 +7,10 @@ TextureImporter:
     second: lives_0
   - first:
       213: -6714008040260607975
-    second: lives_3
+    second: lives_1
   - first:
       213: -2991172225867591519
-    second: lives_6
+    second: lives_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,7 +124,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lives_0
+      name: lives_2
       rect:
         serializedVersion: 2
         x: 18
@@ -132,7 +132,7 @@ TextureImporter:
         width: 849
         height: 230
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,7 +145,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lives_3
+      name: lives_1
       rect:
         serializedVersion: 2
         x: 18
@@ -153,7 +153,7 @@ TextureImporter:
         width: 851
         height: 230
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,7 +166,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lives_6
+      name: lives_0
       rect:
         serializedVersion: 2
         x: 18
@@ -174,7 +174,7 @@ TextureImporter:
         width: 851
         height: 230
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

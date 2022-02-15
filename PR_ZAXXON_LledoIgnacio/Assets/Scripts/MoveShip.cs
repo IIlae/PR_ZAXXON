@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveShip : MonoBehaviour
 {
-    public int speed = 18;
+    public float latSpeed = 20;
     private Vector3 initialPos = new Vector3 (0f,0f,0f);
     private Vector3 initialRot = new Vector3 (0, 0, 0);
     private Vector3 movePos = new Vector3 (0f, 0f, 0f);
@@ -16,10 +16,10 @@ public class MoveShip : MonoBehaviour
     private Vector3 leftSpin = new Vector3 (0,0,120);
     private Vector3 rightSpin = new Vector3 (0,0,-120);
     GameFunctions gameFunctions;
-    //método para restringir la posición en un eje
+    //mï¿½todo para restringir la posiciï¿½n en un eje
     public void limitSpace(int x, float lim, bool superior = true)
     {
-        //si el límite es por arriba
+        //si el lï¿½mite es por arriba
         if (superior)
         {
             if (movePos[x] <= lim)
@@ -31,7 +31,7 @@ public class MoveShip : MonoBehaviour
                 movePos = transform.position;
             }
         }
-        //si el límite es por abajo
+        //si el lï¿½mite es por abajo
         else
         {
             if (movePos[x] >= lim)
@@ -58,10 +58,10 @@ public class MoveShip : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             //desplazamiento a la izquierda
-            movePos += leftMove * speed * Time.deltaTime;
-            //rotación del movimiento
+            movePos += leftMove * latSpeed * Time.deltaTime;
+            //rotaciï¿½n del movimiento
             moveRot += leftSpin * Time.deltaTime;
-            //restricción de rotación
+            //restricciï¿½n de rotaciï¿½n
             if (moveRot[2] < 35)
             {
                 transform.eulerAngles = moveRot;
@@ -70,16 +70,16 @@ public class MoveShip : MonoBehaviour
             {
                 moveRot[2] = 35;
             }
-            //restricción de area
+            //restricciï¿½n de area
             limitSpace(0, -20, false);
         }
         if (Input.GetKey(KeyCode.D))
         {
             //despalzamiento a la derecha
-            movePos += rightMove * speed * Time.deltaTime;
-            //rotación del moviento
+            movePos += rightMove * latSpeed * Time.deltaTime;
+            //rotaciï¿½n del moviento
             moveRot += rightSpin * Time.deltaTime;
-            //restricción de rotación
+            //restricciï¿½n de rotaciï¿½n
             if (moveRot[2] > -35)
             {
                 transform.eulerAngles = moveRot;
@@ -88,30 +88,30 @@ public class MoveShip : MonoBehaviour
             {
                 moveRot[2] = -35;
             }
-            //restricción de area
+            //restricciï¿½n de area
             limitSpace(0, 20);
         }
         if (Input.GetKey(KeyCode.W))
         {
             //desplazamiento hacia arriba
-            movePos += upMove * speed * Time.deltaTime;
-            //restricción de area
+            movePos += upMove * latSpeed * Time.deltaTime;
+            //restricciï¿½n de area
             limitSpace(1, 14);
         }
         if (Input.GetKey(KeyCode.S))
         {
             //desplazamiento hacia arriba
-            movePos += downMove * speed * Time.deltaTime;
-            //restricción de area
+            movePos += downMove * latSpeed * Time.deltaTime;
+            //restricciï¿½n de area
             limitSpace(1, -1, false);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("colisión");
+        print("colisiï¿½n");
         if(other.gameObject.tag == "Obstacle")
         {
-            print("obstáculo");
+            print("obstï¿½culo");
             gameFunctions.hitFunction();
         }
     }
