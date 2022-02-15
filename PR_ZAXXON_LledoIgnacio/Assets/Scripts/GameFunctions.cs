@@ -9,6 +9,8 @@ public class GameFunctions : MonoBehaviour
     GameObject baseNave;
     GameObject dedScreen;
     GameObject explotion;
+    //AudioSource bgm;
+    //AudioSource overMusic;
     MoveShip moveShip;
     Text overMessage;
     Text SpeedCounter;
@@ -25,6 +27,8 @@ public class GameFunctions : MonoBehaviour
 
         //gameManager = GameObject.Find("GameFunctions").GetComponent<GameManager>();
         //print(GameManager.lives);
+        //bgm = GameObject.Find("bgm").GetComponent<AudioSource>();
+        //overMusic = GameObject.Find("OverMusic")..GetComponent<AudioSource>();
         heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
         dedScreen = GameObject.Find("DedScreen");
@@ -69,6 +73,8 @@ public class GameFunctions : MonoBehaviour
     {
         Destroy(baseNave);
         Instantiate(explotion, baseNave.transform.position, Quaternion.identity);
+        //bgm.enabled = false;
+        //overMusic.enabled = true;
         StopCoroutine("ScoreGiver");
         StopCoroutine("SpeedManage");
         dead = true;

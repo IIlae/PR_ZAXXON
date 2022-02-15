@@ -40,20 +40,30 @@ public class obstacleMaker : MonoBehaviour
         {
             intervalo = espaciado / gameFunctions.speed;
             //print(espaciado + "/" + gameFunctions.speed + "=" + intervalo);
-            int randObs = Random.Range(0, obstacArr.Length);
+            //int randObs = Random.Range(0, obstacArr.Length);
+            int randObs = randomizer(obstacArr.Length);
             float yValue;
-            if (randObs == 0)
+            yValue = obstacArr[randObs].transform.position[1];
+            /*if (randObs == 0)
             {
                 yValue = 28.9f;
             }
             else
             {
                 yValue = 0.72f;
-            }
+            }*/
             instPos = new Vector3(Random.Range(20,-20), yValue, 207);
             Instantiate(obstacArr[randObs], instPos, Quaternion.identity);
             //print("instanciado");
             yield return new WaitForSeconds(intervalo);
         }
+    }
+    int randomizer(int list)
+    {
+        for(int x = 0; x < list; x++)
+        {
+            if( Random.Range(0,2) == 0) return x;
+        }
+        return 1;
     }
 }
