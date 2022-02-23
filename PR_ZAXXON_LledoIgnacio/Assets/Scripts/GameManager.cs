@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         for(int x=0; x < Scores.Length; x++)
         {
-            if(Scores[x] > 0 || x > Scores.Length-1) Scores[x] = scoreA;
+            if(Scores[x] < 1 || x > Scores.Length-1) Scores[x] = scoreA;
         }
         if (scoreA > highScore)
         {

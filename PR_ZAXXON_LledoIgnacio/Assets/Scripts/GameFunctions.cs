@@ -37,6 +37,7 @@ public class GameFunctions : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1;
         GameManager.scoreA = 0;
         dedScreen.SetActive(false);
         StartCoroutine("ScoreGiver");

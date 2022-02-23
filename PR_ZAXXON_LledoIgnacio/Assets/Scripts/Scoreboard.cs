@@ -29,6 +29,20 @@ public class Scoreboard : MonoBehaviour
         highScoreTxt.text = "HIGH SCORE: " + GameManager.highScore;
         //scoreTxt.text = "SCORE: " + GameManager.scoreA;
         //condici�n para el mesaje de New High Score
+    }
+    void orderScores()
+    {
+        for (int y=10; y>0; y--)
+        {
+            print(y);
+            print(GameManager.Scores[y-1]);
+            if(GameManager.Scores[y-1] > 0)
+            {
+                scoreTxts[10-y].text = ""+ GameManager.Scores[y-1];
+                scoreTxts[10-y].enabled = true;
+            }
+            else scoreTxts[10-y].enabled = false;
+        }
         if (GameManager.newBest)
         {
             newHighTxt.enabled = true;
@@ -36,18 +50,6 @@ public class Scoreboard : MonoBehaviour
         else
         {
             newHighTxt.enabled = false;
-        }
-    }
-    void orderScores()
-    {
-        for (int y=10; y>0; y--)
-        {
-            if(GameManager.Scores[y] > 0)
-            {
-                scoreTxts[10-y].text = ""+ GameManager.Scores[y];
-                scoreTxts[10-y].enabled = true;
-            }
-            else scoreTxts[10-y].enabled = false;
         }
     }
 
