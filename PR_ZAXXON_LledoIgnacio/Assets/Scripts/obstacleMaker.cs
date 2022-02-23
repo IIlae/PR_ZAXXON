@@ -38,7 +38,7 @@ public class obstacleMaker : MonoBehaviour
         Vector3 instPos;
         while (!gameFunctions.dead)
         {
-            intervalo = espaciado / gameFunctions.speed;
+            intervalo = (espaciado*1.5f) / gameFunctions.speed;
             //print(espaciado + "/" + gameFunctions.speed + "=" + intervalo);
             //int randObs = Random.Range(0, obstacArr.Length);
             int randObs = randomizer(obstacArr.Length);

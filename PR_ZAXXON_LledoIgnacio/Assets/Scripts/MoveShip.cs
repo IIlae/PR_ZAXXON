@@ -96,11 +96,11 @@ public class MoveShip : MonoBehaviour
             //desplazamiento hacia arriba
             movePos += upMove * latSpeed * Time.deltaTime;
             //restricci�n de area
-            limitSpace(1, 14);
+            limitSpace(1, 16);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            //desplazamiento hacia arriba
+            //desplazamiento hacia abajo
             movePos += downMove * latSpeed * Time.deltaTime;
             //restricci�n de area
             limitSpace(1, -1, false);
@@ -111,7 +111,7 @@ public class MoveShip : MonoBehaviour
         print("colisi�n");
         if(other.gameObject.tag == "Obstacle")
         {
-            print("obst�culo");
+            //print("obst�culo");
             gameFunctions.hitFunction();
         }
     }

@@ -17,10 +17,15 @@ public class Buttons : MonoBehaviour
         
     }
 
-    public void startGame()
+    public void startScreen1()
     {
         GameManager.lives = 2;
         SceneManager.LoadScene("Screen1");
+    }
+    public void startScreen3()
+    {
+        GameManager.lives = 2;
+        SceneManager.LoadScene("Screen3");
     }
     public void goToScores()
     {
@@ -33,5 +38,9 @@ public class Buttons : MonoBehaviour
     public void goToMainMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

@@ -9,11 +9,11 @@ public class GameFunctions : MonoBehaviour
     GameObject baseNave;
     GameObject dedScreen;
     GameObject explotion;
-    //AudioSource bgm;
-    //AudioSource overMusic;
+    AudioSource bgm;
+    AudioSource overMusic;
     MoveShip moveShip;
-    Text overMessage;
     Text SpeedCounter;
+    Text pauseTxt;
     Image heartsImg;
     //GameManager gameManager;
     [SerializeField] Sprite[] heartsSprt;
@@ -24,16 +24,14 @@ public class GameFunctions : MonoBehaviour
     public float accelTime = 0.1f;
     private void Awake()
     {
-
-        //gameManager = GameObject.Find("GameFunctions").GetComponent<GameManager>();
-        //print(GameManager.lives);
-        //bgm = GameObject.Find("bgm").GetComponent<AudioSource>();
-        //overMusic = GameObject.Find("OverMusic")..GetComponent<AudioSource>();
+        bgm = GameObject.Find("bgm").GetComponent<AudioSource>();
+        overMusic = GameObject.Find("OverMusic").GetComponent<AudioSource>();
         heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
         dedScreen = GameObject.Find("DedScreen");
         explotion = Resources.Load("prefabs/effects/Explotion1") as GameObject;
         SpeedCounter = GameObject.Find("speedCount").GetComponent<Text>();
+        pauseTxt = GameObject.Find("pauseTxt").GetComponent<Text>();
         moveShip = baseNave.GetComponent<MoveShip>();
         heartsImg.sprite = heartsSprt[GameManager.lives];
     }
@@ -48,7 +46,7 @@ public class GameFunctions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) pause();
+        if (Input.GetKeyDown(KeyCode.T) && !dead) pause();
     }
     public void hitFunction()
     {
@@ -73,10 +71,11 @@ public class GameFunctions : MonoBehaviour
     {
         Destroy(baseNave);
         Instantiate(explotion, baseNave.transform.position, Quaternion.identity);
-        //bgm.enabled = false;
-        //overMusic.enabled = true;
+        bgm.Stop();
+        overMusic.Play();
         StopCoroutine("ScoreGiver");
         StopCoroutine("SpeedManage");
+        Time.timeScale = 0;
         dead = true;
         heartsImg.enabled = false;
         //Comprovaci�n del score
@@ -98,14 +97,20 @@ public class GameFunctions : MonoBehaviour
         {
             print("paused");
             paused = true;
+            pauseTxt.enabled = true;
             Time.timeScale = 0;
         }
         else
         {
             print("resumed");
+            pauseTxt.enabled = false;
             Time.timeScale = 1;
             paused = false;
         }
+    }
+    public float sceneMove(float time)
+    {
+        return (time * speed * Time.deltaTime);
     }
 
     IEnumerator ScoreGiver()
@@ -122,7 +127,6 @@ public class GameFunctions : MonoBehaviour
         while(!dead)
         {
             speed += accelNum;
-            //Shader.SetGlobalVector("Vector2_f037d501af714dff8c4ee7609ccef207", Vector2.down * Uvelocity);
             if (moveShip.latSpeed < 40) moveShip.latSpeed += 5;
             SpeedCounter.text = "Speed: "+speed;
             //print("más velocidad");
