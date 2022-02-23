@@ -5,19 +5,33 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static int lives = 2;
-    public static int score;
+    public static int scoreA;
     public static int highScore;
     public static int volume;
     public static bool newBest;
-    // Start is called before the first frame update
+    public static int[] Scores = new int[10];
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public static void scoreRecord()
+    {
+        for(int x=0; x < Scores.Length; x++)
+        {
+            if(Scores[x] > 0 || x > Scores.Length-1) Scores[x] = scoreA;
+        }
+        if (scoreA > highScore)
+        {
+            highScore = scoreA;
+            newBest = true;
+        }
+        else newBest = false;
     }
 }

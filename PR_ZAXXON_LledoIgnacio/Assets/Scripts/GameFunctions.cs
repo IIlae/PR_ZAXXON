@@ -37,7 +37,7 @@ public class GameFunctions : MonoBehaviour
     }
     void Start()
     {
-        GameManager.score = 0;
+        GameManager.scoreA = 0;
         dedScreen.SetActive(false);
         StartCoroutine("ScoreGiver");
         StartCoroutine("SpeedManage");
@@ -78,14 +78,7 @@ public class GameFunctions : MonoBehaviour
         Time.timeScale = 0;
         dead = true;
         heartsImg.enabled = false;
-        //Comprovaci�n del score
-        if (GameManager.score > GameManager.highScore)
-        {
-            GameManager.highScore = GameManager.score;
-            GameManager.newBest = true;
-        }
-        //print(GameManager.score);
-
+        GameManager.scoreRecord();
         dedScreen.SetActive(true);
         print("game over");
         //SceneManager.LoadScene("Screen1");
@@ -108,16 +101,12 @@ public class GameFunctions : MonoBehaviour
             paused = false;
         }
     }
-    public float sceneMove(float time)
-    {
-        return (time * speed * Time.deltaTime);
-    }
 
     IEnumerator ScoreGiver()
     {
         while (!dead)
         {
-            GameManager.score += (int) speed / 30;
+            GameManager.scoreA += (int) speed / 30;
             yield return new WaitForSeconds(1);
         }
     }

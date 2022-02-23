@@ -9,8 +9,13 @@ public class Scoreboard : MonoBehaviour
     Text highScoreTxt;
     Text scoreTxt;
     Text newHighTxt;
+    [SerializeField] Text[] scoreTxts;
     void Awake()
     {
+        for(int x=0; x < 10; x++)
+        {
+            scoreTxts[x] = GameObject.Find("Score"+x).GetComponent<Text>();
+        }
         //Asignaci�n de las variables de texto
         highScoreTxt = GameObject.Find("HighScore").GetComponent<Text>();
         newHighTxt = GameObject.Find("NewHigh").GetComponent<Text>();
@@ -18,10 +23,11 @@ public class Scoreboard : MonoBehaviour
     }
     void Start()
     {
-        
+        GameManager.scoreRecord();
+        orderScores();
         //Asignaci�n de valores
         highScoreTxt.text = "HIGH SCORE: " + GameManager.highScore;
-        scoreTxt.text = "SCORE: " + GameManager.score;
+        //scoreTxt.text = "SCORE: " + GameManager.scoreA;
         //condici�n para el mesaje de New High Score
         if (GameManager.newBest)
         {
@@ -32,6 +38,19 @@ public class Scoreboard : MonoBehaviour
             newHighTxt.enabled = false;
         }
     }
+    void orderScores()
+    {
+        for (int y=10; y>0; y--)
+        {
+            if(GameManager.Scores[y] > 0)
+            {
+                scoreTxts[10-y].text = ""+ GameManager.Scores[y];
+                scoreTxts[10-y].enabled = true;
+            }
+            else scoreTxts[10-y].enabled = false;
+        }
+    }
+
 
     void Update()
     {
