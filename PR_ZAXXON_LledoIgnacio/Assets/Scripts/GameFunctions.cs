@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameFunctions : MonoBehaviour
 {
     GameObject baseNave;
-    GameObject dedScreen;
+    GameObject mbuttons;
     GameObject explotion;
     AudioSource bgm;
     AudioSource overMusic;
     MoveShip moveShip;
     Text SpeedCounter;
     Text pauseTxt;
+    Text dedTxt;
     Image heartsImg;
     //GameManager gameManager;
     [SerializeField] Sprite[] heartsSprt;
@@ -28,10 +29,11 @@ public class GameFunctions : MonoBehaviour
         overMusic = GameObject.Find("OverMusic").GetComponent<AudioSource>();
         heartsImg = GameObject.Find("hearts").GetComponent<Image>();
         baseNave = GameObject.Find("baseNave");
-        dedScreen = GameObject.Find("DedScreen");
+        mbuttons = GameObject.Find("MButtons");
         explotion = Resources.Load("prefabs/effects/Explotion1") as GameObject;
         SpeedCounter = GameObject.Find("speedCount").GetComponent<Text>();
         pauseTxt = GameObject.Find("pauseTxt").GetComponent<Text>();
+        dedTxt = GameObject.Find("ded").GetComponent<Text>();
         moveShip = baseNave.GetComponent<MoveShip>();
         heartsImg.sprite = heartsSprt[GameManager.lives];
     }
@@ -39,7 +41,8 @@ public class GameFunctions : MonoBehaviour
     {
         Time.timeScale = 1;
         GameManager.scoreA = 0;
-        dedScreen.SetActive(false);
+        mbuttons.SetActive(false);
+        dedTxt.enabled = false;
         StartCoroutine("ScoreGiver");
         StartCoroutine("SpeedManage");
     }
@@ -80,7 +83,8 @@ public class GameFunctions : MonoBehaviour
         dead = true;
         heartsImg.enabled = false;
         GameManager.scoreRecord();
-        dedScreen.SetActive(true);
+        dedTxt.enabled = true;
+        mbuttons.SetActive(true);
         print("game over");
         //SceneManager.LoadScene("Screen1");
     }
@@ -90,17 +94,18 @@ public class GameFunctions : MonoBehaviour
         if (!paused)
         {
             print("paused");
-            paused = true;
+            mbuttons.SetActive(true);
             pauseTxt.enabled = true;
             Time.timeScale = 0;
         }
         else
         {
             print("resumed");
+            mbuttons.SetActive(false);
             pauseTxt.enabled = false;
             Time.timeScale = 1;
-            paused = false;
         }
+        paused = !paused;
     }
 
     IEnumerator ScoreGiver()
